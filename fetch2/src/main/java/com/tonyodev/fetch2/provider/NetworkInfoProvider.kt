@@ -48,7 +48,11 @@ class NetworkInfoProvider constructor(private val context: Context,
                 }
             }
             this.networkCallback = networkCallback
-            connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+            try {
+                connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+            } catch (e: Exception) {
+
+            }
         } else {
             try {
                 context.registerReceiver(networkChangeBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
